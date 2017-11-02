@@ -1,0 +1,10 @@
+com/baorenai/bole/AnnotationTest.class
+com/baorenai/bole/service/JobDetailService.class
+com/baorenai/bole/dao/JobDetailDao.class
+com/baorenai/bole/mapper/JobDetailMapper.class
+com/baorenai/bole/model/JobDetail.class
+com/baorenai/bole/App.class
+com/baorenai/bole/TestA.class
+com/baorenai/bole/AnnotationInfo.class
+com/baorenai/bole/controller/Hello.class
+com/baorenai/bole/config/MyBatisConfig.class

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baorenai.bole.mapper.JobDetailMapper">
+    <resultMap id="BaseResultMap" type="com.baorenai.bole.model.JobDetail">
+        <id column="jobId" property="jobid" jdbcType="VARCHAR"/>
+        <result column="jobTitle" property="jobtitle" jdbcType="VARCHAR"/>
+        <result column="jobDate" property="jobdate" jdbcType="VARCHAR"/>
+        <result column="hire_count" property="hireCount" jdbcType="VARCHAR"/>
+        <result column="jobBigType" property="jobbigtype" jdbcType="VARCHAR"/>
+        <result column="jobLittleType" property="joblittletype" jdbcType="VARCHAR"/>
+        <result column="academic" property="academic" jdbcType="VARCHAR"/>
+        <result column="workPlace" property="workplace" jdbcType="VARCHAR"/>
+        <result column="workType" property="worktype" jdbcType="VARCHAR"/>
+        <result column="workTime" property="worktime" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="Job_detail" property="jobDetail" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    jobId, jobTitle, jobDate, hire_count, jobBigType, jobLittleType, academic, workPlace, 
+    workType, workTime, create_time, update_time, Job_detail
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from Job_Detail
+        where jobId = #{jobid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from Job_Detail
+    where jobId = #{jobid,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.baorenai.bole.model.JobDetail">
+    insert into Job_Detail (jobId, jobTitle, jobDate, 
+      hire_count, jobBigType, jobLittleType, 
+      academic, workPlace, workType, 
+      workTime, create_time, update_time, 
+      Job_detail)
+    values (#{jobid,jdbcType=VARCHAR}, #{jobtitle,jdbcType=VARCHAR}, #{jobdate,jdbcType=VARCHAR}, 
+      #{hireCount,jdbcType=VARCHAR}, #{jobbigtype,jdbcType=VARCHAR}, #{joblittletype,jdbcType=VARCHAR}, 
+      #{academic,jdbcType=VARCHAR}, #{workplace,jdbcType=VARCHAR}, #{worktype,jdbcType=VARCHAR}, 
+      #{worktime,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{jobDetail,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.baorenai.bole.model.JobDetail">
+        insert into Job_Detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jobid != null">
+                jobId,
+            </if>
+            <if test="jobtitle != null">
+                jobTitle,
+            </if>
+            <if test="jobdate != null">
+                jobDate,
+            </if>
+            <if test="hireCount != null">
+                hire_count,
+            </if>
+            <if test="jobbigtype != null">
+                jobBigType,
+            </if>
+            <if test="joblittletype != null">
+                jobLittleType,
+            </if>
+            <if test="academic != null">
+                academic,
+            </if>
+            <if test="workplace != null">
+                workPlace,
+            </if>
+            <if test="worktype != null">
+                workType,
+            </if>
+            <if test="worktime != null">
+                workTime,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="jobDetail != null">
+                Job_detail,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jobid != null">
+                #{jobid,jdbcType=VARCHAR},
+            </if>
+            <if test="jobtitle != null">
+                #{jobtitle,jdbcType=VARCHAR},
+            </if>
+            <if test="jobdate != null">
+                #{jobdate,jdbcType=VARCHAR},
+            </if>
+            <if test="hireCount != null">
+                #{hireCount,jdbcType=VARCHAR},
+            </if>
+            <if test="jobbigtype != null">
+                #{jobbigtype,jdbcType=VARCHAR},
+            </if>
+            <if test="joblittletype != null">
+                #{joblittletype,jdbcType=VARCHAR},
+            </if>
+            <if test="academic != null">
+                #{academic,jdbcType=VARCHAR},
+            </if>
+            <if test="workplace != null">
+                #{workplace,jdbcType=VARCHAR},
+            </if>
+            <if test="worktype != null">
+                #{worktype,jdbcType=VARCHAR},
+            </if>
+            <if test="worktime != null">
+                #{worktime,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="jobDetail != null">
+                #{jobDetail,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baorenai.bole.model.JobDetail">
+        update Job_Detail
+        <set>
+            <if test="jobtitle != null">
+                jobTitle = #{jobtitle,jdbcType=VARCHAR},
+            </if>
+            <if test="jobdate != null">
+                jobDate = #{jobdate,jdbcType=VARCHAR},
+            </if>
+            <if test="hireCount != null">
+                hire_count = #{hireCount,jdbcType=VARCHAR},
+            </if>
+            <if test="jobbigtype != null">
+                jobBigType = #{jobbigtype,jdbcType=VARCHAR},
+            </if>
+            <if test="joblittletype != null">
+                jobLittleType = #{joblittletype,jdbcType=VARCHAR},
+            </if>
+            <if test="academic != null">
+                academic = #{academic,jdbcType=VARCHAR},
+            </if>
+            <if test="workplace != null">
+                workPlace = #{workplace,jdbcType=VARCHAR},
+            </if>
+            <if test="worktype != null">
+                workType = #{worktype,jdbcType=VARCHAR},
+            </if>
+            <if test="worktime != null">
+                workTime = #{worktime,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="jobDetail != null">
+                Job_detail = #{jobDetail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where jobId = #{jobid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baorenai.bole.model.JobDetail">
+    update Job_Detail
+    set jobTitle = #{jobtitle,jdbcType=VARCHAR},
+      jobDate = #{jobdate,jdbcType=VARCHAR},
+      hire_count = #{hireCount,jdbcType=VARCHAR},
+      jobBigType = #{jobbigtype,jdbcType=VARCHAR},
+      jobLittleType = #{joblittletype,jdbcType=VARCHAR},
+      academic = #{academic,jdbcType=VARCHAR},
+      workPlace = #{workplace,jdbcType=VARCHAR},
+      workType = #{worktype,jdbcType=VARCHAR},
+      workTime = #{worktime,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      Job_detail = #{jobDetail,jdbcType=VARCHAR}
+    where jobId = #{jobid,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectByJobDetail" resultMap="BaseResultMap" parameterType="com.baorenai.bole.model.JobDetail">
+        select
+        <include refid="Base_Column_List"/>
+        from Job_Detail
+        <where>
+            <if test="worktype != null">
+                workType = #{worktype,jdbcType=VARCHAR}
+            </if>
+            <if test="jobbigtype != null">
+                AND jobBigType = #{jobbigtype,jdbcType=VARCHAR}
+            </if>
+            <if test="joblittletype != null">
+                AND jobLittleType = #{joblittletype,jdbcType=VARCHAR}
+            </if>
+            <if test="workplace != null">
+                AND workPlace = #{workplace,jdbcType=VARCHAR}
+            </if>
+        </where>
+        <choose>
+            <otherwise>
+                ORDER BY jobDate DESC
+            </otherwise>
+        </choose>
+    </select>
+</mapper>
