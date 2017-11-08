@@ -210,4 +210,40 @@
             </otherwise>
         </choose>
     </select>
+
+    <select id="selectByJobDetailLimit" resultMap="BaseResultMap" parameterType="com.baorenai.bole.model.JobDetail">
+        select
+        <include refid="Base_Column_List"/>
+        from Job_Detail
+        <where>
+            <if test="worktype != null">
+                workType = #{worktype,jdbcType=VARCHAR}
+            </if>
+            <if test="jobbigtype != null">
+                AND jobBigType = #{jobbigtype,jdbcType=VARCHAR}
+            </if>
+            <if test="joblittletype != null">
+                AND jobLittleType = #{joblittletype,jdbcType=VARCHAR}
+            </if>
+            <if test="workplace != null">
+                AND workPlace = #{workplace,jdbcType=VARCHAR}
+            </if>
+        </where>
+        <choose>
+            <otherwise>
+                ORDER BY jobDate DESC limit 20
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectNewsetData" resultMap="BaseResultMap" parameterType="com.baorenai.bole.model.JobDetail">
+        select
+        *
+        from Job_Detail
+        <choose>
+            <otherwise>
+                ORDER BY jobDate DESC limit 1
+            </otherwise>
+        </choose>
+    </select>
 </mapper>

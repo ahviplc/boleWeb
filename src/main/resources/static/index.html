@@ -2,28 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>bole</title>
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/index.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>干货怎么了</title>
 </head>
 <body>
-<form>
-    <div>工作类型</div>
-    <select id="bigJobType" onchange="getSmallJobType(this.options[this.selectedIndex].value)">
-        <option value="技术">技术</option>
-        <option value="产品">产品</option>
-        <option value="内容">内容</option>
-        <option value="市场">市场</option>
-        <option value="游戏">游戏</option>
-        <option value="电商">电商</option>
-        <option value="设计">设计</option>
-        <option value="金融">金融</option>
-    </select>
+    <h3 id="update-time">岗位更新时间：</h3>
+<form class="form-group">
+    <div class="col-lg-3">
+        <label class="col-lg-9 control-label">工作类型</label>
+        <select class="form-control" id="bigJobType"
+                onchange="getSmallJobType(this.options[this.selectedIndex].value)">
+            <option value="">请选择</option>
+            <option value="技术">技术</option>
+            <option value="产品">产品</option>
+            <option value="内容">内容</option>
+            <option value="市场">市场</option>
+            <option value="游戏">游戏</option>
+            <option value="电商">电商</option>
+            <option value="设计">设计</option>
+            <option value="金融">金融</option>
+            <option value="销售">销售</option>
+            <option value="客服">客服</option>
+            <option value="职能">职能</option>
+            <option value="高管">高管</option>
+            <option value="其他">其他</option>
+        </select>
+    </div>
+    <div class="col-lg-3">
+        <label class="col-lg-9 control-label">工作类型(子类)</label>
+        <select class="form-control" id="smallJob">
+            <option value="">请选择</option>
+        </select>
+    </div>
 
-    <div>工作类型(子类)</div>
-    <select id="smallJob">
-        <option value="">不限</option>
-    </select>
+    <div class="col-lg-3">
+        <label class="col-lg-9 control-label">工作性质</label>
+        <select class="form-control" id="worktype">
+            <option value="">请选择</option>
+            <option value="全职">全职</option>
+            <option value="实习">实习</option>
+        </select>
+    </div>
+
+    <div class="col-lg-3">
+        <label class="col-lg-9 control-label">工作地点</label>
+        <select class="form-control" id="workplace">
+            <option value="">不限</option>
+            <option value="杭州市">杭州市</option>
+            <option value="北京市">北京市</option>
+            <option value="广州市">广州市</option>
+            <option value="上海市">上海市</option>
+        </select>
+    </div>
+    <button id="search" type="button" class="btn btn-lg btn-primary  btn-block" onclick="doSerch()">查询</button>
 </form>
+
+<div class="panel panel-default">
+    <div class="panel-heading">查询结果(仅显示最新的20条数据)</div>
+
+    <table class="table" id="table">
+        <thead>
+        <tr>
+            <th>岗位名称</th>
+            <th>发布时间</th>
+            <th>招聘人数</th>
+            <th>内推地址</th>
+        </tr>
+        </thead>
+        <tbody id="result">
+        </tbody>
+    </table>
+</div>
+
+
 </body>
 </html>

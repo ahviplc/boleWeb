@@ -21,8 +21,8 @@ public class TestA {
     }
 
 
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         TestA a= new TestA();
         a.AnnotationTest();
-    }
+    }*/
 }

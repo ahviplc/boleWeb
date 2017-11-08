@@ -6,6 +6,7 @@ import com.baorenai.bole.model.JobDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,9 +30,7 @@ public class JobDetailService {
         return jobDetailDao.selectByJobDetail(jobDetail);
     }
 
-
-
-
-
-
+    public List<JobDetail> getJobDetailByConditionLimit(JobDetail jobDetail) {
+        return jobDetailDao.selectByJobDetailLimit(jobDetail);
+    }
 }

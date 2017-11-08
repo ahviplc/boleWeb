@@ -2,6 +2,7 @@ package com.baorenai.bole.service;
 
 
 import com.baorenai.bole.model.JobDetail;
+import com.baorenai.bole.model.JobModel;
 import com.baorenai.bole.model.JobParam;
 import org.apache.http.impl.client.CloseableHttpClient;
 
@@ -15,7 +16,7 @@ public interface PaChongService {
 
     public JobDetail generateText(CloseableHttpClient httpclient, String uri) throws IOException;
 
-    public List<JobDetail> doSerch(JobDetail jobDetail) throws Exception;
+    public List<JobDetail> doSerch(JobModel jobModel) throws Exception;
 
     public int doAddJob(JobParam jobParam) throws Exception;
 

@@ -3,6 +3,7 @@ package com.baorenai.bole.controller;
 
 import com.alibaba.druid.util.StringUtils;
 import com.baorenai.bole.model.JobDetail;
+import com.baorenai.bole.model.JobModel;
 import com.baorenai.bole.model.JobParam;
 import com.baorenai.bole.service.DailyJobService;
 import com.baorenai.bole.service.JobDetailService;
@@ -10,10 +11,13 @@ import com.baorenai.bole.service.PaChongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/hello")
+@RequestMapping("/job")
 public class Hello {
     @Autowired
     JobDetailService jobDetailService;
@@ -36,10 +40,10 @@ public class Hello {
         return jobDetail.getJobtitle();
     }
 
-    @RequestMapping(value = "/job", method = RequestMethod.POST)
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
     @ResponseBody
-    public List<JobDetail> doJob(@RequestBody JobDetail jobDetail) throws Exception {
-        List<JobDetail> response = paChongService.doSerch(jobDetail);
+    public List<JobDetail> doJob(@RequestBody JobModel jobModel) throws Exception {
+        List<JobDetail> response = paChongService.doSerch(jobModel);
         return response;
     }
 
@@ -53,5 +57,12 @@ public class Hello {
         return 666666;
     }
 
-
+    @RequestMapping(value = "/newestUpdateTime",method = RequestMethod.GET)
+    @ResponseBody
+    public String selectUpdate()
+    {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String date = format.format(new Date().getTime());
+        return date;
+    }
 }

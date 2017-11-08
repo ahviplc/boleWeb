@@ -1,10 +1,9 @@
 package com.baorenai.bole.service.impl;
 
 import com.alibaba.druid.util.StringUtils;
-import com.baorenai.bole.dao.JobDetailDao;
 import com.baorenai.bole.model.JobDetail;
+import com.baorenai.bole.model.JobModel;
 import com.baorenai.bole.model.JobParam;
-import com.baorenai.bole.model.WorkPlace;
 import com.baorenai.bole.service.JobDetailService;
 import com.baorenai.bole.service.PaChongService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +18,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -51,9 +51,7 @@ public class PaChongServiceImpl implements PaChongService {
 
 
     @Override
-    public List<JobDetail> doSerch(JobDetail jobDetail) throws Exception {
-        List<JobDetail> jobs = new ArrayList<JobDetail>();
-
+    public List<JobDetail> doSerch(JobModel jobModel) throws Exception {
 
         /*Assert.notNull(jobParam.getWorkType());
         String url = buildUrl(jobParam);
@@ -77,7 +75,16 @@ public class PaChongServiceImpl implements PaChongService {
                 jobs.add(existDetail);
             }
         }*/
-        return jobDetailService.getJobDetailByCondition(jobDetail);
+        JobDetail jobDetail = new JobDetail();
+        if (!StringUtils.equals(jobModel.workplace,"") && jobModel.workplace != null) {
+            jobDetail.setWorkplace(jobModel.workplace);
+        }
+        jobDetail.setJobbigtype(jobModel.jobbigtype);
+        if (!StringUtils.equals(jobModel.joblittletype,"不限") && jobModel.joblittletype != null) {
+            jobDetail.setJoblittletype(jobModel.joblittletype);
+        }
+        jobDetail.setWorktype(jobModel.worktype);
+        return jobDetailService.getJobDetailByConditionLimit(jobDetail);
     }
 
     @Override
@@ -91,17 +98,20 @@ public class PaChongServiceImpl implements PaChongService {
         for (String job_url : urls) {
             String jobid = job_url.split("=")[1];
             JobDetail existDetail = jobDetailService.getJobDetail(jobid);
-            log.info("existDetail is {}",existDetail.toString());
             if (existDetail == null || existDetail.equals(null)) {
                 JobDetail jobDetail = generateText(httpclient, job_url);
                 jobs.add(jobDetail);
                 jobDetail.setJobid(jobid);
-                log.info("insertJobDeatail is {}",existDetail.toString());
-                Integer i = jobDetailService.addJobDetail(jobDetail);
-                res += i;
-                if (i != 1) {
-                    throw new Exception("add new JobDetail error , size is not equals to 1");
+                try {
+                    Integer i = jobDetailService.addJobDetail(jobDetail);
+                    res += i;
+                    if (i != 1) {
+                        throw new Exception("add new JobDetail error , size is not equals to 1");
+                    }
+                } catch (DuplicateKeyException e) {
+                    log.error("jobdetail is {}, jobId is {}", jobDetail.toString(), jobid);
                 }
+
             }
         }
 

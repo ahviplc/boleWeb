@@ -18,4 +18,9 @@ public interface JobDetailMapper {
     int updateByPrimaryKey(JobDetail record);
 
     List<JobDetail> selectByJobDetail(JobDetail record);
+
+    List<JobDetail> selectByJobDetailLimit(JobDetail record);
+
+
+
 }
